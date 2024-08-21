@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pass Vault</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4; 
+    }
+
+    .background-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('bg.jpg') no-repeat center center fixed;
+      background-size: cover;
+      filter: blur(5px); 
+      z-index: -1; 
+    }
+
+    .container {
+      position: relative;
+      max-width: 500px;
+      margin: 100px auto;
+      padding: 20px;
+      background-color: rgba(255, 255, 255, 0.8); 
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      text-align: center;
+      color: #333; 
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+      color: #333; 
+    }
+
+    input[type="text"],
+    input[type="tel"],
+    input[type="email"] {
+      width: 95%;
+      padding: 10px;
+      font-size: 16px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+      background-color: #4caf50;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    #display {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="background-container"></div>
+  <div class="container">
+    <h1>Take the first step towards your security</h1>
+    <form id="userForm">
+      <div class="form-group">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+      </div>
+      <div class="form-group">
+        <label for="phone">Phone Number:</label>
+        <input type="tel" id="phone" name="phone" required>
+      </div>
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+      </div>
+      <button type="submit" onclick="redirectToNextPage()">Get Started</button>
+    </form>
+    <div id="display"></div>
+  </div>
+  <script>
+    function redirectToNextPage() {
+      window.location.href = "home.html"; 
+    }
+
+    document.getElementById('userForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+      
+      var name = document.getElementById('name').value;
+      var phone = document.getElementById('phone').value;
+      var email = document.getElementById('email').value;
+      
+      var displayDiv = document.getElementById('display');
+      displayDiv.innerHTML = `
+        <h1>${name}'s Pass Vault will keep you safe!</h1>
+      `;
+    });
+  </script>
+</body>
+</html>

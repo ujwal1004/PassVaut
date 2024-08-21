@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Random Password Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url('bg.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            backdrop-filter: blur(5px);
+           
+            background-attachment: fixed;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .mainbox {
+            border: 2px solid black;
+            border-radius: 10px;
+            width: 400px;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.8);
+        }
+
+        #heading {
+            text-align: center;
+            color: black;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        #input_text {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        #passwordLength {
+            width: 60px;
+            height: 25px;
+            margin-bottom: 10px;
+        }
+
+        #generateButton {
+            display: block;
+            margin: 0 auto;
+            margin-bottom: 20px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #randomPassword {
+            font-size: 18px;
+            text-align: center;
+        }
+
+        .home-button {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <a href="home.html" class="home-button">Home</a>
+    <div class="mainbox">
+        <h1 id="heading">Random Password Generator</h1>
+
+        <label for="passwordLength" id="input_text">Password Length:</label>
+        <input type="number" id="passwordLength" value="12"><br>
+        <button id="generateButton">Generate Password</button>
+
+        <p id="randomPassword"></p>
+    </div>
+    <script>
+        document.getElementById("generateButton").addEventListener("click", function () {
+            const passwordLength = parseInt(document.getElementById("passwordLength").value, 10);
+            const randomPassword = generateRandomPassword(passwordLength);
+            document.getElementById("randomPassword").textContent = "Random Password: " + randomPassword;
+        });
+
+        function generateRandomPassword(length) {
+            const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()-_=+";
+            const randomPasswordArray = [];
+            for (let i = 0; i < length; i++) {
+                const randomIndex = Math.floor(Math.random() * characters.length);
+                const randomChar = characters.charAt(randomIndex);
+                randomPasswordArray.push(randomChar);
+            }
+            return randomPasswordArray.join("");
+        }
+    </script>
+</body>
+</html>

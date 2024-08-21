@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Input Form with OTP</title>
+  <style>
+    /* CSS styles remain the same as before */
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>User Input Form with OTP</h1>
+    <form id="userForm">
+      <div class="form-group">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+      </div>
+      <div class="form-group">
+        <label for="phone">Phone Number:</label>
+        <input type="tel" id="phone" name="phone" required>
+      </div>
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+      </div>
+      <div class="form-group" id="otpGroup" style="display: none;">
+        <label for="otp">Enter OTP:</label>
+        <input type="text" id="otp" name="otp" required>
+      </div>
+      <button id="sendOtpBtn">Send OTP</button>
+      <button type="submit" id="submitBtn" style="display: none;">Submit</button>
+    </form>
+    <div id="display"></div>
+  </div>
+  <script>
+    // Generate random 4-digit OTP
+    function generateOTP() {
+      return Math.floor(1000 + Math.random() * 9000);
+    }
+
+    // Simulate OTP sending (replace with actual sending logic)
+    function sendOTP(phoneNumber, otp) {
+      console.log("OTP Sent to", phoneNumber, ": ", otp);
+    }
+
+    // Event listener for sending OTP
+    document.getElementById('sendOtpBtn').addEventListener('click', function(event) {
+      event.preventDefault();
+      
+      var phoneNumber = document.getElementById('phone').value;
+      var otp = generateOTP();
+
+      // Simulate sending OTP
+      sendOTP(phoneNumber, otp);
+
+      // Show OTP input field and hide send button
+      document.getElementById('otpGroup').style.display = 'block';
+      document.getElementById('sendOtpBtn').style.display = 'none';
+      document.getElementById('submitBtn').style.display = 'block';
+    });
+
+    // Event listener for form submission
+    document.getElementById('userForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+      
+      var name = document.getElementById('name').value;
+      var phone = document.getElementById('phone').value;
+      var email = document.getElementById('email').value;
+      var enteredOTP = document.getElementById('otp').value;
+
+      // You can add verification logic here
+      // For simplicity, let's just compare the entered OTP with a hardcoded value
+      var otpVerified = enteredOTP === "1234"; // Hardcoded OTP for demonstration
+
+      if (otpVerified) {
+        var displayDiv = document.getElementById('display');
+        displayDiv.innerHTML = `
+          <h2>User Information:</h2>
+          <p><strong>Name:</strong> ${name}</p>
+          <p><strong>Phone Number:</strong> ${phone}</p>
+          <p><strong>Email:</strong> ${email}</p>
+        `;
+      } else {
+        alert("Invalid OTP. Please try again.");
+      }
+    });
+  </script>
+</body>
+</html>

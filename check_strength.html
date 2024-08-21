@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Password Strength Checker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            position: fixed;
+            
+            width: 100%;
+            height: 100%;
+            background-image: url('bg.jpg'); 
+            background-size: cover;
+            backdrop-filter: blur(5px);
+
+            background-position: center;
+        }
+
+        .container {
+            max-width: 400px;
+            margin: 50px auto;
+            margin-top: 100px;
+            
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.8); 
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .input-group label {
+            flex: 1;
+            text-align: right;
+            margin-right: 10px;
+            color: #333;
+        }
+
+        .input-group input[type="password"] {
+            flex: 2;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        .input-group button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        #result {
+            font-weight: bold;
+            margin-top: 20px;
+            color: #333;
+        }
+
+        .home-button {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <a href="home.html" class="home-button">Home</a>
+    <div class="container">
+        <h1>Password Strength Checker</h1>
+
+        <div class="input-group">
+            <label for="passwordInput">Enter a password:</label>
+            <input type="password" id="passwordInput">
+            <button id="checkButton">Check</button>
+        </div>
+
+        <p id="result"></p>
+    </div>
+
+    <script>
+        document.getElementById("checkButton").addEventListener("click", function () {
+            const password = document.getElementById("passwordInput").value;
+            const strength = getPasswordStrength(password);
+            document.getElementById("result").textContent = "Password strength: " + strength;
+        });
+
+        function getPasswordStrength(password) {
+           
+            if (password.length < 8) {
+                return "Very weak";
+            }
+
+            if (!/[A-Z]/.test(password)) {
+                return "Weak";
+            }
+
+            
+            if (!/[a-z]/.test(password)) {
+                return "Weak";
+            }
+
+            
+            if (!/[0-9]/.test(password)) {
+                return "Weak";
+            }
+
+            if (!/[!@#$%^&*()\-_=+{};:,<.>]/.test(password)) {
+                return "Weak";
+            }
+
+            
+            const commonWords = ["password", "123456", "qwerty", "admin"];
+            for (const commonWord of commonWords) {
+                if (password.toLowerCase().includes(commonWord)) {
+                    return "Weak";
+                }
+            }
+
+            return "Strong";
+        }
+    </script>
+</body>
+</html>
+
